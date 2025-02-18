@@ -8,7 +8,7 @@ public class Main
 		Scanner keyboard = new Scanner(System.in);
 		// Prompt user with options in a loop
 		int choice, ounces, brewTemp, count = 0;
-		String name;
+		String name; //hello
 		double price;
 		
 		do
