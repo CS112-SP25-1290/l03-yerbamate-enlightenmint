@@ -2,9 +2,9 @@ public class CaffeinatedBeverage {
 
     /*************CONSTANTS*************/
 
-    public static final String defaultName = "Yerba";
-    public static final int defaultOunces = 0;
-    public static final double defaultPrice = 0.0;
+    public static final String DEFAULT_NAME = "Yerba";
+    public static final int DEFAULT_OUNCES = 0;
+    public static final double DEFAULT_PRICE = 0.0;
 
     /*************INSTANCE VARIABLES*************/
 
@@ -18,7 +18,7 @@ public class CaffeinatedBeverage {
      */
 
     public CaffeinatedBeverage() {
-        this(CaffeinatedBeverage.defaultName, CaffeinatedBeverage.defaultOunces, CaffeinatedBeverage.defaultPrice);
+        this(CaffeinatedBeverage.DEFAULT_NAME, CaffeinatedBeverage.DEFAULT_OUNCES, CaffeinatedBeverage.DEFAULT_PRICE);
     }
 
     /**
@@ -29,18 +29,21 @@ public class CaffeinatedBeverage {
      */
 
     public CaffeinatedBeverage(String name, int ounces, double price) {
-        this.name = name;
-        this.ounces = ounces;
-        this.price = price;
+        if (!this.setAll(name, ounces, price)) {
+            System.out.println("ERROR: Bad data given to full CaffinatedBeverage constructor");
+            System.exit(0); 
+       }
     }
 
-    /* 
+     
     public CaffeinatedBeverage(CaffeinatedBeverage original) {
         if (original != null) {
-            
+            this.setAll(original.name, original, ounces, original.price);
+        } else{ 
+            System.out.println("ERROR: null data given to copy CaffinatedBeverage constructor");
+            System.exit(0);
         }
     }
-    */
     
     /*************GETTERS*************/
 
@@ -72,8 +75,7 @@ public class CaffeinatedBeverage {
         }
     }
 
-    public  boolean setPrice(double price) {
-        
+    public boolean setPrice(double price) {
 
         if (price >= 0) {
             this.price = price;
@@ -82,6 +84,10 @@ public class CaffeinatedBeverage {
             return false;
         }
 
+    }
+    
+    public boolean setAll(String name, int ounces, double price) {
+        return this.setName(name) && this.setOunces(ounces) && this.setPrice(price);
     }
 
     /*************OTHER METHODS*************/
