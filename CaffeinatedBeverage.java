@@ -38,7 +38,7 @@ public class CaffeinatedBeverage {
      
     public CaffeinatedBeverage(CaffeinatedBeverage original) {
         if (original != null) {
-            this.setAll(original.name, original, ounces, original.price);
+            this.setAll(original.name, original.ounces, original.price);
         } else{ 
             System.out.println("ERROR: null data given to copy CaffinatedBeverage constructor");
             System.exit(0);
@@ -61,8 +61,14 @@ public class CaffeinatedBeverage {
 
     /*************SETTERS*************/
 
-    public void setName(String name) {
-        this.name = name;
+    public boolean setName(String name) {
+        if (name != null && name.length() > 0) {
+            this.name = name;
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 
     public boolean setOunces(int ounces) {
@@ -92,6 +98,10 @@ public class CaffeinatedBeverage {
 
     /*************OTHER METHODS*************/
 
+    public String toString() {
+        return String.format("CaffeinatedBeverage: name = %s, %d fl. oz., $%.2f", this.name, this.ounces, this.price);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || this.getClass() != o.getClass())
@@ -103,6 +113,16 @@ public class CaffeinatedBeverage {
     }
 
     public boolean sip(int ounces) {
+        if (this.ounces >= ounces) {
+            this.ounces -= ounces;
+        } else {
+            this.ounces = 0;
+        }
+        return this.ounces > 0;
         
+    }
+
+    public boolean isEmpty() {
+        return this.ounces == 0;
     }
 }

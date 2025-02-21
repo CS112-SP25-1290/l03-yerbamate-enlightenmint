@@ -3,7 +3,7 @@ public class Tea extends CaffeinatedBeverage {
     public static final int DEFAULT_BREW_TEMP = 90;
 
     /*************INSTANCE VARIABLES*************/
-    private int brewTemp;
+    public int brewTemp;
 
     /*************CONSTRUCTORS*************/
     /*
@@ -27,7 +27,7 @@ public class Tea extends CaffeinatedBeverage {
     public Tea(Tea original) {
         if(original!=null)
         this.setAll(original.getName(), original.getOunces(),
-                    original.getPrice(), original.brewTemp());
+                    original.getPrice(), original.getBrewTemp());
     }
 
     /*************GETTERS*************/
@@ -48,7 +48,7 @@ public class Tea extends CaffeinatedBeverage {
      }
 
     public boolean setAll(String name, int ounces, double price, int brewTemp) {
-         if(!super.setAll())
+         return super.setAll(name, ounces, price) && this.setBrewTemp(brewTemp);
         
         
         //return super.setAll(name, ounces, price) && this.setBrewTemp(brewTemp);
@@ -67,6 +67,7 @@ public class Tea extends CaffeinatedBeverage {
         return String.format("Tea: %s, brewed @ %d°C", caffeineString, this.brewTemp);
      }
 
+     @Override
     public boolean equals(Object other) {
          if(other == null || other instanceof Tea) {
          return false;
@@ -76,4 +77,4 @@ public class Tea extends CaffeinatedBeverage {
      }
 
 }
-}
+
